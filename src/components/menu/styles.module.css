@@ -1,0 +1,32 @@
+.menu {
+  max-width: 245px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  position: relative;
+  z-index: 2;
+}
+
+.menuLogo {
+  max-width: 97px;
+  width: 100%;
+  height: 54.56px;
+  margin-top: 28px;
+  margin-left: 25px;
+}
+
+.nav {
+  font-size: 16px;
+  font-weight: 400;
+  font-style: "Regular";
+  line-height: 20px;
+  color: #000;
+  margin-left: 12px;
+}
+
+.navImage {
+  max-width: 24px;
+  width: 100%;
+  margin-left: 12px;
+}

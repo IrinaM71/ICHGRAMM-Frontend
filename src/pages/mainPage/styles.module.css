@@ -1,0 +1,13 @@
+.grid {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+}
+
+.loading,
+.error,
+.empty {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--text-secondary);
+}
