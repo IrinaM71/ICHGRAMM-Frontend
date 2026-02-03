@@ -7,15 +7,6 @@ const Chat = ({ userId, companionId }) => {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    //Онлайн‑статус собеседника
-    socket.on("userOnline", (userId) => {
-      setOnline(userId, true);
-    });
-
-    socket.on("userOffline", (userId) => {
-      setOnline(userId, false);
-    });
-
     //Подключение к комнате
     socket.emit("joinRoom", userId);
 

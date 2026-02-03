@@ -1,54 +1,45 @@
-import "./App.css";
-import AuthPage from "../pages/authPage/AuthPage.jsx";
+import { Routes, Route, Navigate } from "react-router-dom";
+
+// Layout
+import AppLayout from "../layout/AppLayout.jsx";
+
+// Public pages
 import AuthForm from "../components/authForm/AuthForm.jsx";
-import AuthReset from "../components/authReset/AuthReset.jsx";
-import ProfilePage from "../pages/profilePage/ProfilePage.jsx";
-import { CreatePage } from "../pages/createPage/CreatePage.jsx";
-import ErrorPage from "../pages/errorPage/ErrorPage.jsx";
-import MessagesPage from "../pages/messagesPage/MessagesPage.jsx";
+import SingUp from "../components/sungUp/SingUp.jsx";
+
+// Private pages
 import MainPage from "../pages/mainPage/MainPage.jsx";
-
 import ExplorePage from "../pages/explorePage/ExplorePage.jsx";
+import MessagesPage from "../pages/messagesPage/MessagesPage.jsx";
+import OtherProfile from "../pages/profilePage/OtherProfile.jsx";
+import MyProfile from "../pages/profilePage/myProfile.jsx";
 
-import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
-import AppLayout from "../layouts/AppLayout.jsx";
-import { useAuthStore } from "../../store/authStore.js";
+// Error page
+import ErrorPage from "../pages/errorPage/ErrorPage.jsx";
 
-function PrivateRoute({ children }) {
-  const { isAuth } = useAuthStore();
-  return isAuth ? children : <Navigate to="/auth" replace />;
-}
-
-function AppRouter() {
+export default function AppRouter() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Публичные маршруты*/}
-        <Route path="/auth" element={<AuthPage />} />
-        <Route path="/authForm" element={<AuthForm />} />
-        <Route path="/authReset" element={<AuthReset />} />
+    <Routes>
+      {/* Публичные маршруты */}
+      <Route path="/login" element={<AuthForm />} />
+      <Route path="/signup" element={<SingUp />} />
 
-        {/*Приватные маршруты*/}
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <AppLayout />
-            </PrivateRoute>
-          }
-        >
-          <Route index element={<MainPage />} />
-          <Route path="/profile/:id" element={<ProfilePage />} />
-          <Route path="explore" element={<ExplorePage />} />
-          <Route path="create" element={<CreatePage />} />
-          <Route path="messages" element={<MessagesPage />} />
-        </Route>
+      {/* Основной layout приложения */}
+      <Route element={<AppLayout />}>
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/messages/:companionId" element={<MessagesPage />} />
 
-        {/*Ошибки*/}
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </BrowserRouter>
+        {/* Профили */}
+        <Route path="/profile/me" element={<MyProfile />} />
+        <Route path="/profile/:id" element={<OtherProfile />} />
+      </Route>
+
+      {/* Редирект с корня */}
+      <Route path="/" element={<Navigate to="/main" replace />} />
+
+      {/* 404 */}
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
   );
 }
-
-export default AppRouter;

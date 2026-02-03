@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 import Lock from "../../assets/icons/lock.svg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuthStore } from "../../slice/authSlice";
+import { useAuthStore } from "../../store";
 import { Link } from "react-router-dom";
 
 function AuthReset() {

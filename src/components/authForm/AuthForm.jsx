@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import Logo from "../../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../store/authStore";
+import { useAuthStore } from "../../store";
 import { useState } from "react";
 
 function AuthForm() {
@@ -21,7 +21,7 @@ function AuthForm() {
       setLocalError("Invalid username/email or password");
       return;
     }
-    navigate("/");
+    navigate("/main");
   };
 
   return (

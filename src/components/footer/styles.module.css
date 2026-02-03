@@ -1,40 +1,34 @@
-.active {
-  color: var(--accent-color);
-  font-weight: 600;
-}
-
 .footer {
   max-width: 1440px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  position: fixed;
-  z-index: 2;
-  margin-bottom: 0px;
+  align-items: center; /* центрируем всё */
+  gap: 20px; /* расстояние между ссылками и иконкой */
+  padding: 20px 0;
 }
 
 .footerLink {
-  justify-content: center;
-  gap: 30px;
+  display: flex;
+  justify-content: center; /* центрируем ссылки */
+  gap: 50px; /* равные промежутки */
 }
 
-.footerLink link {
-  font-size: 12px;
+.footerLink a {
+  font-size: 14px;
   font-weight: 400;
   line-height: 16px;
   font-style: "Regular";
   color: #737373;
+  text-decoration: none;
 }
 
 .footerA {
-  margin-left: 682px;
-  margin-bottom: 81px;
+  display: flex;
+  justify-content: center;
 }
 
-.footerA a {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  font-style: "Regular";
-  color: #737373;
+.footerA img {
+  width: 98px;
+  height: 14px;
 }

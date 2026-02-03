@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import Menu from "../../components/menu/Menu";
 import Footer from "../../components/footer/Footer";
-import { useExploreStore } from "../../store/exploreStore";
+import { useExploreStore } from "../../store";
 import { useEffect } from "react";
 
 function ExplorePage() {

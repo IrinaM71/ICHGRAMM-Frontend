@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
-import styles from "./styles.moule.css";
+import styles from "./styles.module.css";
 import Logo from "../../assets/images/logo.png";
 import { useState } from "react";
-import { useAuthStore } from "../../slice/authSlice";
-import { Link } from "react-router";
+import { useAuthStore } from "../../store";
+import { Link } from "react-router-dom";
 
 function SingUp() {
   const navigate = useNavigate();

@@ -1,11 +1,11 @@
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
-import LikeButton from "../likeButton/LikeButton";
-import { usePostStore } from "../../slice/postSlice";
-import { useAuthStore } from "../../slice/authSlice";
+import LikeButton from "../likeButton/LikeButton.jsx";
+
+import { useAuthStore, usePostsStore } from "../../store";
 
 function PostCard({ post }) {
-  const { likePost } = usePostStore();
+  const { likePost } = usePostsStore();
   const { user } = useAuthStore();
 
   const isLiked = post.likes.includes(user?._id);

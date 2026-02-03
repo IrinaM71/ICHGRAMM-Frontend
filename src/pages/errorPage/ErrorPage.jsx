@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
-import Background from "../../assets/images/backgroun.png";
-import Footer from "../../components/footer/Footer";
-import Menu from "../../components/menu/Menu";
+import Background from "../../assets/images/Background.png";
+import Footer from "../../components/footer/Footer.jsx";
+import Menu from "../../components/menu/Menu.jsx";
 
 function ErrorPage() {
   <div className={styles.errorPage}>

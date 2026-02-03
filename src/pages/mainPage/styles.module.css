@@ -1,5 +1,8 @@
 .grid {
+  max-width: 1195px;
+  width: 100%;
   display: grid;
+  flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
 }

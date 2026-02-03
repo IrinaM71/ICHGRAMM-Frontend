@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
 import { useParams } from "react-router-dom";
-import { useProfileStore } from "../../store/profileStore";
+import { useProfileStore } from "../../store";
 import { useEffect, useState } from "react";
 
-function ProfilePage() {
+function OtherProfile() {
   const { id } = useParams();
   const { profile, loading, error, fetchProfile, updateProfile } =
     useProfileStore();
@@ -83,4 +83,4 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default OtherProfile;

@@ -1,12 +1,12 @@
-const API_URL = "http://localhost:5000/server"; //Backend
+const API_URL = "http://localhost:5000"; //Backend
 
 async function request(url, metod = "GET", body) {
   const token = localStorage.getItem("token");
 
   const options = {
     metod,
-    Headers: {
-      "Content-Typ": "application/json",
+    headers: {
+      "Content-Type": "application/json",
       ...(token ? { Autorizatin: `Bearer ${token}` } : {}),
     },
   };

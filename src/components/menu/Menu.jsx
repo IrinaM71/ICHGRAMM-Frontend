@@ -7,23 +7,29 @@ import notificationsIcon from "../../assets/icons/notifications.svg";
 import createchIcon from "../../assets/icons/create.svg";
 import Logo from "../../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../store/authStore";
+import { useAuthStore } from "../../store";
 
 function Menu() {
   const navigate = useNavigate();
-  const { user, logout } = useAuthStore((state) => ({
-    user: state.user,
-    logout: state.logout,
-  }));
+
+  // ✔ Правильные селекторы Zustand
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
 
   const handleLogout = () => {
     logout();
     navigate("/");
   };
 
+  // ✔ Защита от null
+  if (!user) {
+    return null;
+  }
+
   return (
     <nav className={styles.menu}>
       <img className={styles.menuLogo} src={Logo} alt="Application logo " />
+
       <Link className={styles.nav} to="/">
         <img className={styles.navImage} src={homeIcon} alt="home" />
         Home
@@ -73,4 +79,5 @@ function Menu() {
     </nav>
   );
 }
+
 export default Menu;

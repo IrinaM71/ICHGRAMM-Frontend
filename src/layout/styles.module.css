@@ -1,0 +1,34 @@
+.layoutForm {
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.appLayout {
+  max-width: 1440px;
+  width: 80%;
+  display: flex;
+}
+
+/* Левое меню */
+.sidebar {
+  max-width: 245px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Контент справа */
+.content {
+  max-width: 1195px;
+  width: 100%;
+}
+
+/* Footer на всю ширину */
+.footer {
+  max-width: 1440px;
+  width: 100%;
+  margin-top: 700px;
+  position: fixed;
+}
