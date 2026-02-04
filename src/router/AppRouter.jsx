@@ -38,7 +38,7 @@ export default function AppRouter() {
       </Route>
 
       {/* Редирект с корня */}
-      <Route path="/" element={<Navigate to="/main" replace />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
 
       {/* 404 */}
       <Route path="*" element={<ErrorPage />} />
