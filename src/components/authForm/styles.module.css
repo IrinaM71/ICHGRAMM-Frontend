@@ -1,0 +1,133 @@
+.authFormContainer {
+  max-width: 980px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.backgroundImage {
+  max-width: 380.31px;
+  width: 100%;
+}
+
+.authFormWrapper {
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  margin-left: 20px;
+}
+.authFormContent {
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  border: 1px solid #dbdbdb;
+  border-radius: 1px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.backImage {
+  max-width: 190px;
+  width: 100%;
+  margin-top: 10.5px;
+}
+
+.authInput {
+  max-width: 300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
+}
+
+.formInput {
+  max-width: 268px;
+  width: 100%;
+  height: 38px;
+  margin-bottom: 6px;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  background-color: #fafafa;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: "Regular";
+  line-height: 36px;
+  color: #737373;
+  cursor: pointer;
+}
+
+.formButton {
+  max-width: 268px;
+  width: 100%;
+  height: 32px;
+  margin-top: 8px;
+  background-color: #3897f0;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: "SemiBold";
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.authFieldset {
+  max-width: 268px;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  border: none;
+  border-top: 1px solid #dbdbdb;
+  text-align: center;
+}
+
+.authPar {
+  font-size: 12px;
+  font-weight: 400;
+  font-style: "Regular";
+  line-height: 16px;
+  color: #003768;
+  margin-top: 40px;
+}
+
+.authSignUp {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+  margin-top: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 1px;
+}
+
+.authSignUp h3 {
+  font-size: 14px;
+  font-weight: 400;
+  font-style: "Regular";
+  line-height: 18px;
+  color: #000000;
+  margin-top: 12px;
+}
+
+.authSignUp a {
+  font-size: 14px;
+  font-weight: 600;
+  font-style: "SemiBold";
+  line-height: 18px;
+  color: #3897f0;
+  text-decoration: none;
+  cursor: pointer;
+}

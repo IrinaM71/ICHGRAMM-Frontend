@@ -5,7 +5,7 @@ import AppLayout from "../layout/AppLayout.jsx";
 
 // Public pages
 import AuthForm from "../components/authForm/AuthForm.jsx";
-import SingUp from "../components/sungUp/SingUp.jsx";
+import SignUp from "../components/sugnUp/SignUp.jsx";
 
 // Private pages
 import MainPage from "../pages/mainPage/MainPage.jsx";
@@ -22,7 +22,7 @@ export default function AppRouter() {
     <Routes>
       {/* Публичные маршруты */}
       <Route path="/login" element={<AuthForm />} />
-      <Route path="/signup" element={<SingUp />} />
+      <Route path="/signup" element={<SignUp />} />
 
       {/* Основной layout приложения */}
       <Route element={<AppLayout />}>
