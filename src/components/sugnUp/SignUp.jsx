@@ -34,11 +34,11 @@ function SingUp() {
   };
 
   return (
-    <nav>
-      <form className={styles.singUpForm} onSubmit={onSubmit}>
+    <div className={styles.signUpWrapper}>
+      <form className={styles.signUpContainer} onSubmit={onSubmit}>
         <img className={styles.authImage} src={Logo} alt="Application logo" />
 
-        <p>
+        <p className={styles.sungUpP1}>
           Sign up to see photos and videos
           <br />
           from your friends.
@@ -84,26 +84,32 @@ function SingUp() {
         />
 
         <p className={styles.sungUpP}>
-          People who use our service may have uploaded your contact information
-          to Instagram. <a href="">Learn More</a>
+          People who use our service may have uploaded
+          <br />
+          your contact information to Instagram. <a href="">Learn More</a>
         </p>
 
         <p className={styles.sungUpP}>
-          By signing up, you agree to our <a href="">Terms</a>,{" "}
-          <a href="">Privacy Policy</a>
+          By signing up, you agree to our <a href="">Terms, </a>
+          <a href="">
+            Privacy
+            <br />
+            Policy
+          </a>
           and <a href="">Coocies Policy</a>
         </p>
 
-        <button className={styles.formInput} type="submit" disabled={loading}>
+        <button className={styles.formButton} type="submit" disabled={loading}>
           Sing up
         </button>
       </form>
-
       <div className={styles.loginBox}>
-        <h3>Have an account?</h3>
-        <Link to="/main">Log in</Link>
+        <h3 className={styles.loginBoxH}>Have an account?</h3>
+        <Link className={styles.loginBoxA} to="/main">
+          Log in
+        </Link>
       </div>
-    </nav>
+    </div>
   );
 }
 

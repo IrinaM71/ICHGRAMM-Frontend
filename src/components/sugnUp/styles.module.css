@@ -1,0 +1,114 @@
+.signUpWrapper {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0 auto;
+}
+
+.signUpContainer {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #dbdbdb;
+  margin-top: 40px;
+  margin: 0 auto;
+}
+
+.authImage {
+  max-width: 190px;
+  width: 100%;
+  height: auto;
+}
+
+.sungUpP1 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  font-style: "SemiBold";
+  color: #737373;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formInput {
+  max-width: 268px;
+  width: 100%;
+  height: 38px;
+  margin-bottom: 6px;
+  padding-left: 10px;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  background-color: #fafafa;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: "Regular";
+  line-height: 36px;
+  color: #737373;
+  cursor: pointer;
+}
+
+.sungUpP {
+  font-size: 11.81px;
+  font-weight: 400;
+  font-style: "Regular";
+  line-height: 16px;
+  color: #737373;
+  margin-top: 20px;
+}
+
+.sungUpP a {
+  color: #003768;
+  text-decoration: none;
+}
+
+.formButton {
+  max-width: 268px;
+  width: 100%;
+  height: 32px;
+  margin-top: 8px;
+  margin-bottom: 29px;
+  background-color: #0095f6;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: "SemiBold";
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.loginBox {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dbdbdb;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.loginBoxH {
+  font-size: 14px;
+  font-weight: 400;
+  font-style: "Regular";
+  line-height: 18px;
+  color: #000000;
+}
+
+.loginBoxA {
+  font-size: 14px;
+  font-weight: 600;
+  font-style: "SemiBold";
+  line-height: 18px;
+  color: #0095f6;
+  text-decoration: none;
+}
