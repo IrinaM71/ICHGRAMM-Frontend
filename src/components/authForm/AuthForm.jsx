@@ -73,6 +73,7 @@ function AuthForm() {
             <p
               className={styles.authPar}
               onClick={() => navigate("/authReset")}
+              style={{ cursor: "pointer" }}
             >
               Forgot password?
             </p>

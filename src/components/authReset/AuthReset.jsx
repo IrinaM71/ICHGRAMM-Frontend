@@ -29,10 +29,15 @@ function AuthReset() {
   };
 
   return (
-    <>
+    <div className={styles.resetContainer}>
       <form className={styles.resetForm} onSubmit={onSubmit}>
         <img className={styles.resetImage} src={Lock} alt="Lock icon" />
-
+        <h3 className={styles.resetTitle}>Trouble logging in?</h3>
+        <p className={styles.resetPar}>
+          Enter your email, phone, or username and we'll
+          <br />
+          send you a link to get back into your account.
+        </p>
         <input
           className={styles.formInput}
           type="text"
@@ -49,7 +54,7 @@ function AuthReset() {
           Reset your password
         </button>
 
-        <fieldset>
+        <fieldset className={styles.resetFieldset}>
           <legend>OR</legend>
 
           <p
@@ -61,9 +66,10 @@ function AuthReset() {
           </p>
         </fieldset>
       </form>
-
-      <Link to="/login">Back to login</Link>
-    </>
+      <div className={styles.backToLogin}>
+        <Link to="/login">Back to login</Link>
+      </div>
+    </div>
   );
 }
 

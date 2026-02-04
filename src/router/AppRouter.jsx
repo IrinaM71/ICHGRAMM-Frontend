@@ -6,6 +6,7 @@ import AppLayout from "../layout/AppLayout.jsx";
 // Public pages
 import AuthForm from "../components/authForm/AuthForm.jsx";
 import SignUp from "../components/sugnUp/SignUp.jsx";
+import AuthReset from "../components/authReset/AuthReset.jsx";
 
 // Private pages
 import MainPage from "../pages/mainPage/MainPage.jsx";
@@ -23,6 +24,7 @@ export default function AppRouter() {
       {/* Публичные маршруты */}
       <Route path="/login" element={<AuthForm />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/authReset" element={<AuthReset />} />
 
       {/* Основной layout приложения */}
       <Route element={<AppLayout />}>

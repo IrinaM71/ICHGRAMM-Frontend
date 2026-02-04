@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import axios from "axios";
+import api from "../api/axios.js";
 
 export const useAuthStore = create((set, get) => ({
   user: null,
@@ -7,23 +7,21 @@ export const useAuthStore = create((set, get) => ({
   loading: false,
   error: null,
 
-  // Устанавливаем токен в axios
   setToken: (token) => {
     if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       localStorage.setItem("token", token);
     } else {
-      delete axios.defaults.headers.common["Authorization"];
+      delete api.defaults.headers.common["Authorization"];
       localStorage.removeItem("token");
     }
     set({ token });
   },
 
-  // Регистрация
   registerUser: async (data) => {
     try {
       set({ loading: true, error: null });
-      const res = await axios.post("/api/auth/register", data);
+      const res = await api.post("/auth/register", data);
 
       const token = res.data.token;
       get().setToken(token);
@@ -36,11 +34,10 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  // Логин
   loginUser: async (data) => {
     try {
       set({ loading: true, error: null });
-      const res = await axios.post("/api/auth/login", data);
+      const res = await api.post("/auth/login", data);
 
       const token = res.data.token;
       get().setToken(token);
@@ -53,14 +50,13 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  // Получение текущего пользователя
   fetchMe: async () => {
     const token = get().token;
     if (!token) return;
 
     try {
       set({ loading: true });
-      const res = await axios.get("/api/auth/me");
+      const res = await api.get("/auth/me");
       set({ user: res.data, loading: false });
     } catch (err) {
       console.error(err);
@@ -69,7 +65,6 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  // Выход
   logout: () => {
     get().setToken("");
     set({ user: null });

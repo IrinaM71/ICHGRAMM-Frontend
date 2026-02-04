@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import Logo from "../../assets/images/logo.png";
 import { useState } from "react";
 import { useAuthStore } from "../../store";
 import { Link } from "react-router-dom";
 
-function SingUp() {
+function SignUp() {
   const navigate = useNavigate();
-  const { registerUser, loading } = useAuthStore();
+  const { registerUser, loading, error } = useAuthStore();
 
   const [form, setForm] = useState({
     username: "",
@@ -27,10 +27,10 @@ function SingUp() {
 
     const success = await registerUser(form);
     if (!success) {
-      setLocalError("This username already taken");
+      setLocalError(error || "Registration failed");
       return;
     }
-    navigate("/");
+    navigate("/main");
   };
 
   return (
@@ -72,7 +72,7 @@ function SingUp() {
           required
         />
 
-        {localError && <p className={styles.singUpError}>{localError}</p>}
+        {localError && <p className={styles.signUpError}>{localError}</p>}
         <input
           className={styles.formInput}
           type="password"
@@ -83,29 +83,29 @@ function SingUp() {
           required
         />
 
-        <p className={styles.sungUpP}>
+        <p className={styles.sugnUpP}>
           People who use our service may have uploaded
           <br />
           your contact information to Instagram. <a href="">Learn More</a>
         </p>
 
-        <p className={styles.sungUpP}>
+        <p className={styles.sugnUpP}>
           By signing up, you agree to our <a href="">Terms, </a>
           <a href="">
             Privacy
             <br />
             Policy
           </a>
-          and <a href="">Coocies Policy</a>
+          and <a href="">Cookies Policy</a>
         </p>
 
         <button className={styles.formButton} type="submit" disabled={loading}>
-          Sing up
+          Sign up
         </button>
       </form>
       <div className={styles.loginBox}>
         <h3 className={styles.loginBoxH}>Have an account?</h3>
-        <Link className={styles.loginBoxA} to="/main">
+        <Link className={styles.loginBoxA} to="/auth">
           Log in
         </Link>
       </div>
@@ -113,4 +113,4 @@ function SingUp() {
   );
 }
 
-export default SingUp;
+export default SignUp;
