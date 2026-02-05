@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import api from "../api/axios.js";
+import { api } from "../utils/api.js";
 
 export const useAuthStore = create((set, get) => ({
   user: null,
@@ -9,10 +9,8 @@ export const useAuthStore = create((set, get) => ({
 
   setToken: (token) => {
     if (token) {
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       localStorage.setItem("token", token);
     } else {
-      delete api.defaults.headers.common["Authorization"];
       localStorage.removeItem("token");
     }
     set({ token });
@@ -21,15 +19,16 @@ export const useAuthStore = create((set, get) => ({
   registerUser: async (data) => {
     try {
       set({ loading: true, error: null });
+
       const res = await api.post("/auth/register", data);
 
-      const token = res.data.token;
+      const token = res.token;
       get().setToken(token);
 
-      set({ user: res.data.user, loading: false });
+      set({ user: res.user, loading: false });
       return true;
     } catch (err) {
-      set({ loading: false, error: err.response?.data?.message || "Error" });
+      set({ loading: false, error: err.message || "Error" });
       return false;
     }
   },
@@ -37,15 +36,16 @@ export const useAuthStore = create((set, get) => ({
   loginUser: async (data) => {
     try {
       set({ loading: true, error: null });
+
       const res = await api.post("/auth/login", data);
 
-      const token = res.data.token;
+      const token = res.token;
       get().setToken(token);
 
-      set({ user: res.data.user, loading: false });
+      set({ user: res.user, loading: false });
       return true;
     } catch (err) {
-      set({ loading: false, error: err.response?.data?.message || "Error" });
+      set({ loading: false, error: err.message || "Error" });
       return false;
     }
   },
@@ -57,7 +57,7 @@ export const useAuthStore = create((set, get) => ({
     try {
       set({ loading: true });
       const res = await api.get("/auth/me");
-      set({ user: res.data, loading: false });
+      set({ user: res, loading: false });
     } catch (err) {
       console.error(err);
       get().setToken("");

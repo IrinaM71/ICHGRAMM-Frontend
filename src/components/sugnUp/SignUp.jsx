@@ -21,15 +21,34 @@ function SignUp() {
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setLocalError("");
 
-    const success = await registerUser(form);
+    // Клиентская валидация
+    if (
+      !form.username.trim() ||
+      !form.fullName.trim() ||
+      !form.email.trim() ||
+      !form.password.trim()
+    ) {
+      setLocalError("All fields are required");
+      return;
+    }
+
+    const success = await registerUser({
+      username: form.username.trim(),
+      fullName: form.fullName.trim(),
+      email: form.email.trim(),
+      password: form.password.trim(),
+    });
+
     if (!success) {
       setLocalError(error || "Registration failed");
       return;
     }
+
     navigate("/main");
   };
 
@@ -105,7 +124,7 @@ function SignUp() {
       </form>
       <div className={styles.loginBox}>
         <h3 className={styles.loginBoxH}>Have an account?</h3>
-        <Link className={styles.loginBoxA} to="/auth">
+        <Link className={styles.loginBoxA} to="/login">
           Log in
         </Link>
       </div>

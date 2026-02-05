@@ -17,14 +17,14 @@ function AuthForm() {
     e.preventDefault();
     setLocalError("");
 
-    const success = await loginUser(identifier, password);
+    const success = await loginUser({ identifier, password });
 
     if (!success) {
       setLocalError("Invalid username/email or password");
       return;
     }
 
-    navigate("/");
+    navigate("/main");
   };
 
   return (

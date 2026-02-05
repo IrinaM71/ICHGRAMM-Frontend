@@ -1,13 +1,11 @@
-const API_URL = "http://localhost:5000"; //Backend
-
-async function request(url, metod = "GET", body) {
+async function request(url, method = "GET", body) {
   const token = localStorage.getItem("token");
 
   const options = {
-    metod,
+    method,
     headers: {
       "Content-Type": "application/json",
-      ...(token ? { Autorizatin: `Bearer ${token}` } : {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
   };
 
@@ -15,7 +13,7 @@ async function request(url, metod = "GET", body) {
     options.body = JSON.stringify(body);
   }
 
-  const response = await fetch(API_URL + url, options);
+  const response = await fetch(url, options);
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
