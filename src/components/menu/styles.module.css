@@ -1,17 +1,17 @@
 .menu {
   max-width: 245px;
   width: 100%;
-  height: 100%;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  background-color: aqua;
+  gap: 30px;
 }
 
 .menuLogo {
   max-width: 97px;
   width: 100%;
-  height: 54.56px;
+
   margin-top: 28px;
   margin-left: 25px;
 }
@@ -22,11 +22,37 @@
   font-style: "Regular";
   line-height: 20px;
   color: #000;
+  text-decoration: none;
   margin-left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .navImage {
   max-width: 24px;
   width: 100%;
+  object-fit: contain;
   margin-left: 12px;
+}
+.activeNav {
+  font-style: "Bold";
+  font-weight: 700;
+}
+
+.navButton {
+  max-width: 200px;
+  width: 100%;
+  height: 40px;
+  background-color: #737373;
+  border: none;
+  border-radius: 8px;
+  margin-left: 0 auto;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: "Regular";
+  line-height: 20px;
+  color: #ffffff;
+
+  cursor: pointer;
 }

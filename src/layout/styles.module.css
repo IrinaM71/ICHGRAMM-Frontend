@@ -1,34 +1,26 @@
-.layoutForm {
-  max-width: 1440px;
-  width: 100%;
+.layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-.appLayout {
-  max-width: 1440px;
-  width: 80%;
+.mainArea {
   display: flex;
+  flex: 1;
 }
 
-/* Левое меню */
 .sidebar {
-  max-width: 245px;
-  width: 100%;
-  height: 100%;
+  width: 250px; /* или сколько нужно */
+  border-right: 1px solid #ddd;
 }
 
-/* Контент справа */
 .content {
-  max-width: 1195px;
-  width: 100%;
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
 }
 
-/* Footer на всю ширину */
 .footer {
-  max-width: 1440px;
-  width: 100%;
-  margin-top: 700px;
-  position: fixed;
+  border-top: 1px solid #ddd;
+  padding: 10px 20px;
 }

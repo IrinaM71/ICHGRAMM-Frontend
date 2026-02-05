@@ -2,7 +2,6 @@ import styles from "./styles.module.css";
 import socket from "../../components/chat/socket";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import Menu from "../../components/menu/Menu.jsx";
 import ChatList from "../../components/chatList/ChatList.jsx";
 import { useAuthStore, useMessagesStore } from "../../store";
 

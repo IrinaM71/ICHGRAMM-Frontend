@@ -6,7 +6,7 @@ import messagesIcon from "../../assets/icons/messages.svg";
 import notificationsIcon from "../../assets/icons/notifications.svg";
 import createchIcon from "../../assets/icons/create.svg";
 import Logo from "../../assets/images/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store";
 
 function Menu() {
@@ -30,48 +30,82 @@ function Menu() {
     <nav className={styles.menu}>
       <img className={styles.menuLogo} src={Logo} alt="Application logo " />
 
-      <Link className={styles.nav} to="/">
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
+        }
+      >
         <img className={styles.navImage} src={homeIcon} alt="home" />
         Home
-      </Link>
+      </NavLink>
 
-      <Link className={styles.nav} to="/search">
+      <NavLink
+        to="/search"
+        className={({ isActive }) =>
+          isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
+        }
+      >
         <img className={styles.navImage} src={searchIcon} alt="search" />
         Search
-      </Link>
+      </NavLink>
 
-      <Link className={styles.nav} to="/explore">
+      <NavLink
+        to="/explore"
+        className={({ isActive }) =>
+          isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
+        }
+      >
         <img className={styles.navImage} src={exploreIcon} alt="explore" />
         Explore
-      </Link>
+      </NavLink>
 
-      <Link className={styles.nav} to="/messages">
+      <NavLink
+        to="/messages"
+        className={({ isActive }) =>
+          isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
+        }
+      >
         <img className={styles.navImage} src={messagesIcon} alt="messages" />
         Messages
-      </Link>
+      </NavLink>
 
-      <Link className={styles.nav} to="/notifications">
+      <NavLink
+        to="/notifications"
+        className={({ isActive }) =>
+          isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
+        }
+      >
         <img
           className={styles.navImage}
           src={notificationsIcon}
           alt="notification"
         />
         Notification
-      </Link>
-
-      <Link className={styles.nav} to="/create">
+      </NavLink>
+      <NavLink
+        to="/create"
+        className={({ isActive }) =>
+          isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
+        }
+      >
         <img className={styles.navImage} src={createchIcon} alt="create" />
         Create
-      </Link>
+      </NavLink>
 
-      <Link className={styles.nav} to={`/profile/${user.id}`}>
+      <NavLink
+        to={`/profile/${user.id}`}
+        className={({ isActive }) =>
+          isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
+        }
+      >
         <img
           className={styles.navImage}
-          src={user.avatar || "/default-avatar.png"}
+          src={user?.avatar || "/default-avatar.png"}
           alt="profile"
         />
         Profile
-      </Link>
+      </NavLink>
 
       <button className={styles.navButton} onClick={handleLogout}>
         Logout
