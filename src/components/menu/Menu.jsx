@@ -31,7 +31,7 @@ function Menu() {
       <img className={styles.menuLogo} src={Logo} alt="Application logo " />
 
       <NavLink
-        to="/"
+        to="/main"
         className={({ isActive }) =>
           isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
         }

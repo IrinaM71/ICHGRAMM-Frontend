@@ -18,25 +18,31 @@ function Footer() {
   return (
     <div className={styles.footer}>
       <p className={styles.footerLink}>
-        <Link to="/" className={isActive("/") ? styles.active : ""}>
+        <Link to="/main" className={isActive("/main") ? styles.active : ""}>
           Home
         </Link>
-        <Link to="/search" className={isActive("/") ? styles.active : ""}>
+        <Link to="/search" className={isActive("/search") ? styles.active : ""}>
           Search
         </Link>
-        <Link to="/explore" className={isActive("/") ? styles.active : ""}>
+        <Link
+          to="/explore"
+          className={isActive("/explore") ? styles.active : ""}
+        >
           Explore
         </Link>
-        <Link to="/messages" className={isActive("/") ? styles.active : ""}>
+        <Link
+          to="/messages"
+          className={isActive("/messages") ? styles.active : ""}
+        >
           Messages
         </Link>
         <Link
           to="/notifications"
-          className={isActive("/") ? styles.active : ""}
+          className={isActive("/notifications") ? styles.active : ""}
         >
           Notifications
         </Link>
-        <Link to="/create" className={isActive("/") ? styles.active : ""}>
+        <Link to="/create" className={isActive("/create") ? styles.active : ""}>
           Create
         </Link>
       </p>
