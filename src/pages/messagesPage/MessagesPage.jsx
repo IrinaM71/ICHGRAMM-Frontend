@@ -72,7 +72,6 @@ function MessagesPage() {
 
   return (
     <div className={styles.mesForm}>
-      <Menu />
       <ChatList />
 
       <div className={styles.mesPage}>

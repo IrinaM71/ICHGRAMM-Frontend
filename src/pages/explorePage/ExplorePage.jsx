@@ -1,5 +1,4 @@
 import styles from "./styles.module.css";
-import Footer from "../../components/footer/Footer";
 import { useExploreStore } from "../../store";
 import { useEffect } from "react";
 
@@ -10,21 +9,22 @@ function ExplorePage() {
     fetchUserPhotos();
   }, [fetchUserPhotos]);
 
+  const safePhotos = photos || [];
+
   return (
     <div className={styles.explore}>
-      <Menu />
       <div className={styles.container}>
         {loading && <p className={styles.loading}>Loading photos...</p>}
         {error && <p className={styles.error}></p>}
 
-        {!loading && !error && photos.length === 0 && (
+        {!loading && !error && safePhotos.length === 0 && (
           <p className={styles.empty}>No photos yet</p>
         )}
 
         {!loading &&
           !error &&
-          photos.length > 0 &&
-          photos.map((photo) => (
+          safePhotos.length > 0 &&
+          safePhotos.map((photo) => (
             <img
               key={photo.id}
               src={photo.url}
@@ -33,7 +33,6 @@ function ExplorePage() {
             />
           ))}
       </div>
-      <Footer />
     </div>
   );
 }

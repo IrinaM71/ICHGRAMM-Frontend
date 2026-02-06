@@ -19,7 +19,7 @@ function MainPage() {
     return <div className={styles.error}>Failed to load posts</div>;
   }
 
-  // 🔥 Защита №1 — если posts undefined, превращаем в пустой массив
+  //  Защита №1 — если posts undefined, превращаем в пустой массив
   const safePosts = posts || [];
 
   return (

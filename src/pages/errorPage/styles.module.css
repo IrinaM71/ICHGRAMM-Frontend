@@ -1,17 +1,14 @@
-.errorPage {
-  max-width: 1440px;
-  width: 100%;
-}
-
 .container {
   max-width: 1195px;
   max-width: 100%;
+  display: flex;
+  gap: 40px;
 }
 
 .backImag {
   max-width: 301.03px;
   width: 100%;
-  height: 460px;
+
   margin-left: 119px;
   margin-top: 94px;
 }
@@ -19,16 +16,23 @@
 .errorText {
   display: flex;
   flex-direction: column;
+  margin-top: 130px;
 }
 
 .errorH2 {
+  font-family: "Roboto";
   font-size: 36px;
   font-weight: 700;
   line-height: 20px;
+  font-style: "Bold";
+  color: #000;
 }
 
 .errorP {
+  font-family: "Roboto";
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
+  font-style: "SemiBold";
+  color: #737373;
 }

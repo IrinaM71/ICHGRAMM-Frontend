@@ -30,18 +30,18 @@ export default function AppRouter() {
       <Route element={<AppLayout />}>
         <Route path="/main" element={<MainPage />} />
         <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/messages" element={<MessagesPage />} />
         <Route path="/messages/:companionId" element={<MessagesPage />} />
 
         {/* Профили */}
         <Route path="/profile/me" element={<MyProfile />} />
         <Route path="/profile/:id" element={<OtherProfile />} />
+        {/* 404 */}
+        <Route path="*" element={<ErrorPage />} />
       </Route>
 
       {/* Редирект с корня */}
       <Route path="/" element={<Navigate to="/login" replace />} />
-
-      {/* 404 */}
-      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }
