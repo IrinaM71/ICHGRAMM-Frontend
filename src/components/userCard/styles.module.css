@@ -1,0 +1,14 @@
+.infoCard {
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.cardName {
+  font-family: "Roboto";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  font-style: "Bold";
+  color: #000000;
+}

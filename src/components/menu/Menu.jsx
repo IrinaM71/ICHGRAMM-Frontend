@@ -12,7 +12,6 @@ import { useAuthStore } from "../../store";
 function Menu() {
   const navigate = useNavigate();
 
-  // ✔ Правильные селекторы Zustand
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
 
@@ -21,14 +20,9 @@ function Menu() {
     navigate("/");
   };
 
-  // ✔ Защита от null
-  if (!user) {
-    return null;
-  }
-
   return (
     <nav className={styles.menu}>
-      <img className={styles.menuLogo} src={Logo} alt="Application logo " />
+      <img className={styles.menuLogo} src={Logo} alt="Application logo" />
 
       <NavLink
         to="/main"
@@ -83,6 +77,7 @@ function Menu() {
         />
         Notification
       </NavLink>
+
       <NavLink
         to="/create"
         className={({ isActive }) =>
@@ -93,8 +88,9 @@ function Menu() {
         Create
       </NavLink>
 
+      {/* Профиль — работает даже если user ещё не загружен */}
       <NavLink
-        to={`/profile/${user.id}`}
+        to="/profile/me"
         className={({ isActive }) =>
           isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
         }

@@ -10,8 +10,10 @@ import AuthReset from "../components/authReset/AuthReset.jsx";
 
 // Private pages
 import MainPage from "../pages/mainPage/MainPage.jsx";
+import SearchPage from "../pages/searchPage/SearchPage.jsx";
 import ExplorePage from "../pages/explorePage/ExplorePage.jsx";
 import MessagesPage from "../pages/messagesPage/MessagesPage.jsx";
+import NotificationsPage from "../pages/notificationsPage/NotificationsPage.jsx";
 import OtherProfile from "../pages/profilePage/OtherProfile.jsx";
 import MyProfile from "../pages/profilePage/myProfile.jsx";
 
@@ -29,9 +31,11 @@ export default function AppRouter() {
       {/* Основной layout приложения */}
       <Route element={<AppLayout />}>
         <Route path="/main" element={<MainPage />} />
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/messages" element={<MessagesPage />} />
         <Route path="/messages/:companionId" element={<MessagesPage />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
 
         {/* Профили */}
         <Route path="/profile/me" element={<MyProfile />} />

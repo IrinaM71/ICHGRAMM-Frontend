@@ -1,9 +1,20 @@
 import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
 import styles from "./styles.module.css";
 import Footer from "../components/footer/Footer";
 import Menu from "../components/menu/Menu";
+import { useAuthStore } from "../store";
 
 function AppLayout() {
+  const fetchMe = useAuthStore((state) => state.fetchMe);
+  const token = useAuthStore((state) => state.token);
+
+  useEffect(() => {
+    if (token) {
+      fetchMe();
+    }
+  }, [token, fetchMe]);
+
   return (
     <div className={styles.layout}>
       <div className={styles.mainArea}>

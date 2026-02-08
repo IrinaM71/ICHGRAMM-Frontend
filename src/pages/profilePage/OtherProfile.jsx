@@ -1,84 +1,58 @@
-import styles from "./styles.module.css";
-import { useParams } from "react-router-dom";
-import { useProfileStore } from "../../store";
+import { useParams, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ProfileHeader from "../../components/profile/ProfileHeader.jsx";
+import styles from "./styles.module.css";
+import { api } from "../../utils/api.js";
 
 function OtherProfile() {
   const { id } = useParams();
-  const { profile, loading, error, fetchProfile, updateProfile } =
-    useProfileStore();
+  const [profile, setProfile] = useState(null);
+  const [error, setError] = useState(false);
 
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
-  const [avatar, setAvatar] = useState("");
-
-  useEffect(() => {
-    fetchProfile(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  //  Проверка id до эффекта, но без return
+  const invalidId = !id;
 
   useEffect(() => {
-    if (profile) {
-      setName(profile.name || "");
-      setBio(profile.bio || "");
-      setAvatar(profile?.avatar || "");
+    if (invalidId) return;
+
+    async function load() {
+      try {
+        const res = await api.get(`/users/${id}`);
+        setProfile(res.data);
+      } catch (err) {
+        console.error("Failed to load profile:", err);
+        setError(true);
+      }
     }
-  }, [profile]);
 
-  const handleAvatarUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    load();
+  }, [id, invalidId]);
 
-    const reader = new FileReader();
-    reader.onloadend = () => setAvatar(reader.result);
-    reader.readAsDataURL(file); // конвертация в Base64
-  };
+  //  Теперь можно делать return
+  if (invalidId || error) {
+    return <Navigate to="/profile/me" replace />;
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const success = await updateProfile({
-      name,
-      bio,
-      avatar,
-    });
-
-    if (success) {
-      alert("Profile updated");
-    }
-  };
-
-  if (loading) return <p>Loading profile...</p>;
-  if (error) return <p className={styles.error}>{error}</p>;
+  if (!profile) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className={styles.profile}>
-      <h2>Profile</h2>
+    <div className={styles.page}>
+      <ProfileHeader
+        avatar={profile.avatar}
+        username={profile.username}
+        about={profile.about}
+        website={profile.website}
+        posts={profile.postsCount}
+        followers={profile.followersCount}
+        following={profile.followingCount}
+        isMe={false}
+      />
 
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <img
-          src={avatar || "/default-avatar.png"}
-          alt="avatar"
-          className={styles.avatar}
-        />
-
-        <input type="file" accept="image/*" onChange={handleAvatarUpload} />
-
-        <input
-          type="text"
-          placeholder="Your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <textarea
-          placeholder="Your bio"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-        />
-
-        <button type="submit">Save changes</button>
-      </form>
+      <div className={styles.gridContainer}>
+        {/* Посты другого пользователя */}
+      </div>
     </div>
   );
 }

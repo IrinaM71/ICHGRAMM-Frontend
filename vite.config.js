@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  appType: "spa", // ← ВАЖНО! Включает fallback для всех маршрутов
   server: {
     proxy: {
       "/auth": {
@@ -42,6 +43,5 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
-    historyApiFallback: true, // ← ВАЖНО!
   },
 });
