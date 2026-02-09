@@ -2,7 +2,7 @@ import styles from "./ProfileStats.module.css";
 
 export default function ProfileStats({ posts, followers, following }) {
   return (
-    <div className={styles.stats}>
+    <div className={styles.statsProfile}>
       <p>
         <strong>{posts}</strong> posts
       </p>

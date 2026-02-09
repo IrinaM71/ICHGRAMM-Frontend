@@ -17,7 +17,7 @@ export const updateProfile = async (data) => {
 
 export const uploadAvatar = async (formData) => {
   const res = await api.post("/users/avatar", formData, {
-    Headers: { "Content-Type": "multipart/form-data" },
+    headers: { "Content-Type": "multipart/form-data" },
   });
   return res.data;
 };

@@ -1,0 +1,15 @@
+.avatarProfile {
+  max-width: 168px;
+  width: 100%;
+  border-radius: 50%;
+  border: 3px solid #ee07b4;
+}
+
+.imageProfile {
+  max-width: 150px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #fff;
+}

@@ -6,7 +6,21 @@ export const useAuthStore = create((set, get) => ({
   token: localStorage.getItem("token") || "",
   loading: false,
   error: null,
+  updateUser: async (formData) => {
+    try {
+      set({ loading: true, error: null });
 
+      const res = await api.patch("/users/me/update", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      set({ user: res.user, loading: false });
+    } catch (err) {
+      set({ loading: false, error: err.message || "Error updating profile" });
+    }
+  },
   setToken: (token) => {
     if (token) {
       localStorage.setItem("token", token);

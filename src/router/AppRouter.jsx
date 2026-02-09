@@ -16,6 +16,7 @@ import MessagesPage from "../pages/messagesPage/MessagesPage.jsx";
 import NotificationsPage from "../pages/notificationsPage/NotificationsPage.jsx";
 import OtherProfile from "../pages/profilePage/OtherProfile.jsx";
 import MyProfile from "../pages/profilePage/myProfile.jsx";
+import EditProfile from "../components/editProfile/EditProfile.jsx";
 
 // Error page
 import ErrorPage from "../pages/errorPage/ErrorPage.jsx";
@@ -40,6 +41,7 @@ export default function AppRouter() {
         {/* Профили */}
         <Route path="/profile/me" element={<MyProfile />} />
         <Route path="/profile/:id" element={<OtherProfile />} />
+        <Route path="/profile/edit" element={<EditProfile />} />
         {/* 404 */}
         <Route path="*" element={<ErrorPage />} />
       </Route>

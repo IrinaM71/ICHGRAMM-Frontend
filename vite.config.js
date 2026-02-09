@@ -6,6 +6,11 @@ export default defineConfig({
   appType: "spa", // ← ВАЖНО! Включает fallback для всех маршрутов
   server: {
     proxy: {
+      "/socket.io": {
+        target: "http://localhost:5000",
+        ws: true,
+        changeOrigin: true,
+      },
       "/auth": {
         target: "http://localhost:5000",
         changeOrigin: true,
