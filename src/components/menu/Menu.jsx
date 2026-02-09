@@ -8,12 +8,14 @@ import createchIcon from "../../assets/icons/create.svg";
 import Logo from "../../assets/images/logo.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store";
+import { useSearchStore } from "../../store";
 
 function Menu() {
   const navigate = useNavigate();
 
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
+  const { open } = useSearchStore();
 
   const handleLogout = () => {
     logout();
@@ -39,6 +41,10 @@ function Menu() {
         className={({ isActive }) =>
           isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
         }
+        onClick={(e) => {
+          e.preventDefault();
+          open();
+        }}
       >
         <img className={styles.navImage} src={searchIcon} alt="search" />
         Search

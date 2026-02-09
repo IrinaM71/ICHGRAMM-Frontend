@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import styles from "./styles.module.css";
 import Footer from "../components/footer/Footer";
 import Menu from "../components/menu/Menu";
+import SearchPanel from "../components/searchPanel/SearchPanel";
 import { useAuthStore } from "../store";
 
 function AppLayout() {
@@ -26,7 +27,7 @@ function AppLayout() {
           <Outlet />
         </main>
       </div>
-
+      <SearchPanel />
       <footer className={styles.footer}>
         <Footer />
       </footer>

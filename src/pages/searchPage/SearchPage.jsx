@@ -1,29 +1,88 @@
-import { useSearchStore } from "../../store/searchStore";
-import SearchBar from "../../components/searchBar/SearchBar.jsx";
+import { useState, useEffect, useCallback } from "react";
 import UserCard from "../../components/userCard/UserCard.jsx";
 import styles from "./styles.module.css";
 
 function SearchPage() {
-  const { results, loading, error, searchUsers } = useSearchStore();
+  const [value, setValue] = useState("");
+  const [results, setResults] = useState([]);
+  const [recent, setRecent] = useState(() => {
+    return JSON.parse(localStorage.getItem("recentSearches") || "[]");
+  });
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  // Мемоизируем, чтобы ESLint не ругался
+  const saveRecent = useCallback(
+    (query) => {
+      if (!query.trim()) return;
+
+      const updated = [query, ...recent.filter((r) => r !== query)].slice(0, 5);
+      setRecent(updated);
+      localStorage.setItem("recentSearches", JSON.stringify(updated));
+    },
+    [recent]
+  );
+
+  const fetchResults = useCallback(async (query) => {
+    try {
+      const res = await fetch(`/search?query=${query}`);
+      const data = await res.json();
+      setResults(data);
+    } catch (err) {
+      console.error("Search error:", err);
+    }
+  }, []);
+
+  useEffect(() => {
+    const trimmed = value.trim();
+
+    const timer = setTimeout(() => {
+      if (!trimmed) {
+        setResults([]);
+        return;
+      }
+
+      fetchResults(trimmed);
+      saveRecent(trimmed);
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [value, fetchResults, saveRecent]);
 
   return (
-    <div className={styles.page}>
-      <h2 className={styles.title}>Search</h2>
+    <div className={styles.searchPage}>
+      <h2 className={styles.searchTitle}>Search</h2>
 
-      <SearchBar onSearch={searchUsers} />
+      <input
+        type="text"
+        className={styles.searchInput}
+        placeholder="Search"
+        value={value}
+        onChange={handleChange}
+      />
 
-      {loading && <div className={styles.loading}>Searching...</div>}
-      {error && <div className={styles.error}>{error}</div>}
+      <div className={styles.searchResults}>
+        <h4 className={styles.recentTitle}>Recent</h4>
 
-      <div className={styles.list}>
+      {value.trim() === "" && recent.length > 0 ? (
+        recent.map((item) => (
+            <div key={item} className={styles.recentItem} onClick={() => setValue(item)}>
+              {item}
+            </div>
+          ))
+        
+      
+        ) : (
+          <p className={styles.noRecent}>No recent searches</p>
+        )}
+        </div>
+      <div className={styles.results}>
         {results.map((user) => (
           <UserCard key={user._id} user={user} />
         ))}
       </div>
-
-      {!loading && results.length === 0 && (
-        <div className={styles.empty}>No users found</div>
-      )}
     </div>
   );
 }

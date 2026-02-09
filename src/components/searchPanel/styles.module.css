@@ -1,0 +1,57 @@
+/* Контейнер всего оверлея */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85vh;
+  pointer-events: none; /* по умолчанию клики проходят сквозь */
+  z-index: 9999;
+}
+
+/* Когда панель открыта — включаем клики */
+.overlay.open {
+  pointer-events: auto;
+}
+
+/* Затемняющий фон */
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); /* прозрачный */
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+.overlay.open .backdrop {
+  background: rgba(0, 0, 0, 0.4); /* затемнение */
+  pointer-events: auto; /* можно кликнуть чтобы закрыть */
+}
+
+/* Панель поиска */
+.panel {
+  position: absolute;
+  top: 0;
+  left: 250px; /* ← ширина твоего Menu */
+  width: 0;
+  height: 100%;
+  background: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.overlay.open .panel {
+  width: 350px; /* ширина панели */
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+}
