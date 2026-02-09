@@ -9,6 +9,7 @@ import Logo from "../../assets/images/logo.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store";
 import { useSearchStore } from "../../store";
+import { useAddPostStore } from "../../store/addPostStore";
 
 function Menu() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ function Menu() {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
   const { open } = useSearchStore();
+  const openAddPost = useAddPostStore((state) => state.open);
 
   const handleLogout = () => {
     logout();
@@ -89,6 +91,10 @@ function Menu() {
         className={({ isActive }) =>
           isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
         }
+        onClick={(e) => {
+          e.preventDefault();
+          openAddPost();
+        }}
       >
         <img className={styles.navImage} src={createchIcon} alt="create" />
         Create

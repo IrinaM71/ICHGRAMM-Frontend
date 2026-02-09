@@ -5,6 +5,7 @@ import Footer from "../components/footer/Footer";
 import Menu from "../components/menu/Menu";
 import SearchPanel from "../components/searchPanel/SearchPanel";
 import { useAuthStore } from "../store";
+import AddPost from "../components/addPost/AddPost";
 
 function AppLayout() {
   const fetchMe = useAuthStore((state) => state.fetchMe);
@@ -28,6 +29,7 @@ function AppLayout() {
         </main>
       </div>
       <SearchPanel />
+      <AddPost />
       <footer className={styles.footer}>
         <Footer />
       </footer>
