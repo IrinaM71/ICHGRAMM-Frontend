@@ -1,11 +1,15 @@
 import { useAuthStore } from "../../store";
+import { usePostsStore } from "../../store";
 import { useNavigate } from "react-router-dom";
 import ProfileHeader from "../../components/profile/ProfileHeader";
 import styles from "./styles.module.css";
 
 function MyProfile() {
-  const { user } = useAuthStore();
+  const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
+  const posts = usePostsStore((state) => state.posts);
+
+  const myPosts = posts.filter((p) => p.author === user._id);
 
   if (!user) return <div>Loading...</div>;
 
@@ -24,7 +28,13 @@ function MyProfile() {
       />
 
       <div className={styles.gridContainer}>
-        {/* Здесь будут посты пользователя */}
+        {myPosts.map((post) => (
+          <img
+            key={post._id}
+            src={`http://localhost:5000${post.image}`}
+            className={styles.gridItem}
+          />
+        ))}
       </div>
     </div>
   );

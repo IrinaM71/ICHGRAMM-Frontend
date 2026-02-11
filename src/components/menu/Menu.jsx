@@ -10,6 +10,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store";
 import { useSearchStore } from "../../store";
 import { useAddPostStore } from "../../store/addPostStore";
+import Avatar from "../profile/Avatar.jsx";
 
 function Menu() {
   const navigate = useNavigate();
@@ -107,11 +108,7 @@ function Menu() {
           isActive ? `${styles.nav} ${styles.activeNav}` : styles.nav
         }
       >
-        <img
-          className={styles.navImage}
-          src={user?.avatar || "/default-avatar.png"}
-          alt="profile"
-        />
+        <Avatar src={user?.avatar} size={24} />
         Profile
       </NavLink>
 

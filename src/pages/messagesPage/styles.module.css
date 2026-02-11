@@ -1,0 +1,47 @@
+.messagesPage {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.contactList {
+  width: 396px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.contactHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  font-family: "Roboto";
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 25px;
+  font-style: "Bold";
+}
+
+.chatArea {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatHeader {
+  max-width: 797px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding-left: 20px;
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  font-style: "semiBold";
+}

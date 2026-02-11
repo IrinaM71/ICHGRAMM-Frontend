@@ -17,4 +17,9 @@ export const usePostsStore = create((set) => ({
       set({ error: "Failed to load feed", loading: false });
     }
   },
+
+  addPost: (post) =>
+    set((state) => ({
+      posts: [post, ...state.posts],
+    })),
 }));

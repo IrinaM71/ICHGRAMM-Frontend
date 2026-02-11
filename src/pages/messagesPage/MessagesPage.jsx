@@ -1,110 +1,56 @@
 import styles from "./styles.module.css";
-import socket from "../../components/chat/socket";
 import { useParams } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 import ChatList from "../../components/chatList/ChatList.jsx";
+import Avatar from "../../components/profile/Avatar.jsx";
 import { useAuthStore, useMessagesStore } from "../../store";
 
 function MessagesPage() {
-  const { companionId } = useParams();
-  const user = useAuthStore((s) => s.user);
+  const { userId } = useParams();
 
-  const {
-    messages,
-    fetchMessages,
-    addMessage,
-    typing,
-    setTyping,
-    onlineUsers,
-    setOnline,
-  } = useMessagesStore();
+  const user = useAuthStore((state) => state.user);
+  const loadMessages = useMessagesStore((state) => state.loadMessages);
+  const chatPartner = useMessagesStore((state) => state.chatPartner);
+  const lastSeen = chatPartner?.lastSeen;
 
-  const [text, setText] = useState("");
-  const bottomRef = useRef(null);
-
-  // Загружаем сообщения
   useEffect(() => {
-    fetchMessages(companionId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [companionId]);
-
-  // Подключение к сокету
-  useEffect(() => {
-    socket.emit("joinRoom", { userId: user._id, companionId });
-
-    socket.on("receiveMessage", (msg) => addMessage(msg));
-
-    socket.on("typing", () => {
-      setTyping(true);
-      setTimeout(() => setTyping(false), 1500);
-    });
-
-    socket.on("userOnline", (id) => setOnline(id, true));
-    socket.on("userOffline", (id) => setOnline(id, false));
-
-    return () => {
-      socket.off("receiveMessage");
-      socket.off("typing");
-      socket.off("userOnline");
-      socket.off("userOffline");
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [companionId, user._id]);
-
-  // Автоскролл
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  const sendMessage = () => {
-    if (!text.trim()) return;
-
-    const msg = {
-      sender: user._id,
-      receiver: companionId,
-      text,
-    };
-
-    socket.emit("sendMessage", msg);
-    addMessage(msg);
-    setText("");
-  };
+    if (userId) {
+      loadMessages(userId);
+    }
+  }, [userId, loadMessages]);
 
   return (
-    <div className={styles.mesForm}>
-      <ChatList />
+    <div className={styles.messagesPage}>
+      {/* Левая колонка — список контактов */}
+      <div className={styles.contactList}>
+        <div className={styles.contactHeader}>
+          <span className={styles.username}>{user?.username}</span>
+        </div>
+        {/* Тут позже будет список контактов */}
+      </div>
 
-      <div className={styles.mesPage}>
+      {/* Правая колонка — чат */}
+      <div className={styles.chatArea}>
+        {/* Верхняя панель чата */}
         <div className={styles.chatHeader}>
-          <p>{onlineUsers[companionId] ? "🟢 Online" : "⚪ Offline"}</p>
+          <Avatar src={chatPartner?.avatar} size={40} />
+          <span className={styles.chatUsername}>{chatPartner?.username}</span>
         </div>
 
-        <div className={styles.chatBody}>
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={
-                msg.sender === user._id ? styles.myMessage : styles.theirMessage
-              }
-            >
-              {msg.text}
-            </div>
-          ))}
-          {typing && <p className={styles.typing}>typing...</p>}
-          <div ref={bottomRef}></div>
+        {/* Информация о собеседнике */}
+        <div className={styles.chatPartner}>
+          <Avatar src={chatPartner?.avatar} size={40} />
+          <span className={styles.chatUsername}>{chatPartner?.username}</span>
+
+          <button className={styles.viewProfileButton}>View profile</button>
+
+          {lastSeen && (
+            <span className={styles.lastSeen}>Last seen: {lastSeen}</span>
+          )}
         </div>
 
-        <div className={styles.chatInput}>
-          <input
-            value={text}
-            onChange={(e) => {
-              setText(e.target.value);
-              socket.emit("typing", { to: companionId });
-            }}
-            placeholder="Enter message"
-          />
-          <button onClick={sendMessage}>Send</button>
-        </div>
+        {/* Список сообщений */}
+        <ChatList />
       </div>
     </div>
   );
