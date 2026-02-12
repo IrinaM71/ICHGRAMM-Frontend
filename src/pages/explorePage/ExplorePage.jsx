@@ -1,38 +1,27 @@
 import styles from "./styles.module.css";
-import { useExploreStore } from "../../store";
 import { useEffect } from "react";
+import { useExploreStore } from "../../store/exploreStore";
 
 function ExplorePage() {
-  const { photos, loading, error, fetchUserPhotos } = useExploreStore();
+  const { posts, fetchAllPosts } = useExploreStore();
+  console.log("EXPLORE POSTS:", posts);
+  console.log("PAGE STORE INSTANCE:", useExploreStore.getState());
 
   useEffect(() => {
-    fetchUserPhotos();
-  }, [fetchUserPhotos]);
+    fetchAllPosts();
 
-  const safePhotos = photos || [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <div className={styles.explore}>
-      <div className={styles.container}>
-        {loading && <p className={styles.loading}>Loading photos...</p>}
-        {error && <p className={styles.error}></p>}
-
-        {!loading && !error && safePhotos.length === 0 && (
-          <p className={styles.empty}>No photos yet</p>
-        )}
-
-        {!loading &&
-          !error &&
-          safePhotos.length > 0 &&
-          safePhotos.map((photo) => (
-            <img
-              key={photo.id}
-              src={photo.url}
-              alt="user content"
-              className={styles.photo}
-            />
-          ))}
-      </div>
+    <div className={styles.exploreGrig}>
+      {posts?.map((post) => (
+        <img
+          key={post._id}
+          src={`http://localhost:5000${post.image}`}
+          style={{ width: "100%", objectFit: "cover" }}
+        />
+      ))}
     </div>
   );
 }

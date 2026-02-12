@@ -1,23 +1,25 @@
 import { create } from "zustand";
 import { api } from "../utils/api";
 
-export const useExploreStore = create((set) => {
-  const fetchUserPhotos = async () => {
-    set({ loading: true, error: null });
+export const useExploreStore = create((set) => ({
+  posts: [],
 
+  fetchAllPosts: async () => {
     try {
-      const res = await api.get("/photos/user");
-      set({ photos: res.data, loading: false });
-    } catch (error) {
-      console.error(error);
-      set({ error: "Failed to load photos", loading: false });
-    }
-  };
+      const res = await api.get("/posts");
+      console.log("RAW RESPONSE:", res);
+      console.log("STORE INSTANCE:", Math.random());
 
-  return {
-    photos: [],
-    loading: false,
-    error: null,
-    fetchUserPhotos,
-  };
-});
+      const data = Array.isArray(res.data) ? res.data : [];
+
+      const onlyWithImages = data.filter(
+        (post) =>
+          post.image && post.image !== "null" && post.image !== "undefined",
+      );
+
+      set({ posts: onlyWithImages });
+    } catch (err) {
+      console.error("Explore error:", err);
+    }
+  },
+}));
