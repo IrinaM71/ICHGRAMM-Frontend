@@ -30,7 +30,7 @@ function MainPage() {
         <>
           <div className={styles.mainGrid}>
             {safePosts.map((post) => (
-              <PostCard key={post.id} data={post} />
+              <PostCard key={post._id} post={post} />
             ))}
           </div>
 

@@ -1,17 +1,24 @@
 import { useAuthStore } from "../../store";
 import { usePostsStore } from "../../store";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import ProfileHeader from "../../components/profile/ProfileHeader";
 import styles from "./styles.module.css";
 
 function MyProfile() {
   const user = useAuthStore((state) => state.user);
-  const navigate = useNavigate();
   const posts = usePostsStore((state) => state.posts);
+  const navigate = useNavigate();
 
-  const myPosts = posts.filter((p) => p.author === user._id);
+  const fetchFeed = usePostsStore((state) => state.fetchFeed);
+
+  useEffect(() => {
+    fetchFeed();
+  }, [fetchFeed]);
 
   if (!user) return <div>Loading...</div>;
+
+  const myPosts = (posts || []).filter((p) => p.author === user._id);
 
   return (
     <div className={styles.page}>

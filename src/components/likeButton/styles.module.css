@@ -1,0 +1,15 @@
+.likeBtn {
+  max-width: 23.67px;
+  border: none;
+  background-color: #fff;
+  margin-top: 35px;
+}
+
+.likeSpan {
+  max-width: 172px;
+  font-family: "Roboto";
+  font-size: 12.06px;
+  font-style: "Semibold";
+  line-height: 15.5px;
+  color: #000;
+}
