@@ -8,24 +8,25 @@ import styles from "./styles.module.css";
 function MyProfile() {
   const user = useAuthStore((state) => state.user);
   const posts = usePostsStore((state) => state.posts);
+  const fetchFeed = usePostsStore((state) => state.fetchFeed);
   const navigate = useNavigate();
 
-  const fetchFeed = usePostsStore((state) => state.fetchFeed);
-
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     fetchFeed();
-  }, [fetchFeed]);
+  }, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   if (!user) return <div>Loading...</div>;
 
-  const myPosts = (posts || []).filter((p) => p.author === user._id);
+  const myPosts = (posts || []).filter((p) => p.author?._id === user._id);
 
   return (
     <div className={styles.page}>
       <ProfileHeader
         avatar={user.avatar || "/default-avatar.png"}
         username={user.username}
-        about={user.about || ""}
+        about={user.description || ""}
         website={user.website || ""}
         posts={user.postsCount ?? 0}
         followers={user.followersCount ?? 0}

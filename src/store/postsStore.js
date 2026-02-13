@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { api } from "../utils/api";
+import { useAuthStore } from "./authStore";
 
 export const usePostsStore = create((set) => ({
   posts: [],
@@ -11,10 +12,30 @@ export const usePostsStore = create((set) => ({
 
     try {
       const res = await api.get("/posts/feed");
+      console.log("FEED RESPONSE:", res.data);
+      // ВАЖНО: сохраняем только res.data
       set({ posts: res, loading: false });
     } catch (error) {
       console.error(error);
       set({ error: "Failed to load feed", loading: false });
+    }
+  },
+
+  fetchMyPosts: async (userId) => {
+    set({ loading: true, error: null });
+
+    try {
+      const res = await api.get(`/posts/user/${userId}`);
+
+      set({ posts: res, loading: false });
+
+      // если сервер возвращает обновлённого пользователя
+      if (res.data.user) {
+        useAuthStore.getState().updateUser(res.data.user);
+      }
+    } catch (err) {
+      console.error(err);
+      set({ error: "Failed to load posts", loading: false });
     }
   },
 
@@ -33,15 +54,14 @@ export const usePostsStore = create((set) => ({
         return {
           ...p,
           likes: alreadyLiked
-            ? p.likes.filter((id) => id !== userId) // убираем лайк
-            : [...p.likes, userId], // добавляем лайк
+            ? p.likes.filter((id) => id !== userId)
+            : [...p.likes, userId],
         };
       });
 
       return { posts: updated };
     });
 
-    // отправляем запрос на сервер
     try {
       await api.post(`/likes/${postId}`);
     } catch (err) {

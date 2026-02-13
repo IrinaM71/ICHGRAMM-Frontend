@@ -1,25 +1,23 @@
 import styles from "./styles.module.css";
 import { useEffect } from "react";
-import { useExploreStore } from "../../store/exploreStore";
+import { usePostsStore } from "../../store";
 
 function ExplorePage() {
-  const { posts, fetchAllPosts } = useExploreStore();
-  console.log("EXPLORE POSTS:", posts);
-  console.log("PAGE STORE INSTANCE:", useExploreStore.getState());
+  const posts = usePostsStore((state) => state.posts);
+  const fetchFeed = usePostsStore((state) => state.fetchFeed);
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    fetchAllPosts();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchFeed();
   }, []);
 
   return (
-    <div className={styles.exploreGrig}>
+    <div className={styles.exploreGrid}>
       {posts?.map((post) => (
         <img
           key={post._id}
           src={`http://localhost:5000${post.image}`}
-          style={{ width: "100%", objectFit: "cover" }}
+          className={styles.photo}
         />
       ))}
     </div>

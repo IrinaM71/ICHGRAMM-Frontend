@@ -16,11 +16,16 @@ export const useAuthStore = create((set, get) => ({
         },
       });
 
-      set({ user: res.user, loading: false });
+      // ВАЖНО: правильное поле
+      set({ user: res.data.user, loading: false });
     } catch (err) {
-      set({ loading: false, error: err.message || "Error updating profile" });
+      set({
+        loading: false,
+        error: err.message || "Error updating profile",
+      });
     }
   },
+
   setToken: (token) => {
     if (token) {
       localStorage.setItem("token", token);

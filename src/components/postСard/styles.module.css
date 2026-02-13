@@ -10,7 +10,7 @@
 .cardHeader {
   display: flex;
   justify-content: start;
-  gap: 20px;
+  gap: 50px;
 }
 
 .cardImage {
